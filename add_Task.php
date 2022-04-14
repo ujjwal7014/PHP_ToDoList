@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -14,10 +16,10 @@ if ($conn->connect_error) {
 
 $task = $_POST["work"];
 
-$sql = "INSERT INTO todos(Title)VALUES('$task')";
+$sql = "INSERT INTO {$_SESSION['uid']} (Title)VALUES('$task')";
 
 if ($conn->query($sql) === TRUE) {
-    header("location: ./index.php");
+    header("location: ./ToDoPage.php");
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
